@@ -1,15 +1,14 @@
 package com.lsj.stb;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.lsj.stb.sql.SqlTable;
 
 public class WordTableBuilder extends AbstractTableBuilder  implements TableBuilder{
 
-	public WordTableBuilder(String url, String username, String password) throws ClassNotFoundException, SQLException {
-		super(url, username, password);
+	public WordTableBuilder(SqlType sqlType) throws ClassNotFoundException {
+		super(sqlType);
 	}
 
 	@Override
