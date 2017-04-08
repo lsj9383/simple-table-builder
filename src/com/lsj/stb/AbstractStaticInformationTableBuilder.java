@@ -14,11 +14,7 @@ public abstract class AbstractStaticInformationTableBuilder implements TableBuil
 	 * col2pro用于将office中的列名和SqlField中的属性名进行对应，这样可以不用强行规定office中的列名顺序，并且支持更多的列名选择。
 	 */
 	protected final static Map<String, String> col2pro = new HashMap<>();
-	protected final static Map<AbstractTableBuilder.SqlType, String> driverMap = new HashMap<>();
-	static{
-		driverMap.put(SqlType.SqlServer, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		driverMap.put(SqlType.MySql, "com.mysql.jdbc.Driver");
-	}
+	static{}
 	
 	static{
 		col2pro.put("序号", "number");
