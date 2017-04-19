@@ -20,6 +20,38 @@ public abstract class AbstractSqlField implements SqlField{
 	protected Boolean isAutoIncrement = false;
 	protected Boolean isNotNull = false;
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public Integer getLength() {
+		return length;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public Boolean getIsPrimaryKey() {
+		return isPrimaryKey;
+	}
+
+	public Boolean getIsAutoIncrement() {
+		return isAutoIncrement;
+	}
+
+	public Boolean getIsNotNull() {
+		return isNotNull;
+	}
+
 	protected AbstractSqlField(String name, String chineseName, String type, Integer length, String desc){
 		this.name = name;
 		this.chineseName = chineseName;

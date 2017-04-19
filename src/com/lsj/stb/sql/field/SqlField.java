@@ -6,5 +6,5 @@ package com.lsj.stb.sql.field;
  *
  */
 public interface SqlField {
-	public String createSql();
+	String createSql();
 }

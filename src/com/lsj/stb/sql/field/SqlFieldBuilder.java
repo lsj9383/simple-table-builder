@@ -16,6 +16,26 @@ public abstract class SqlFieldBuilder {
 	private String length;
 	private String desc;
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getLength() {
+		return length;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
 	public abstract SqlField doBuild(String name, String chineseName, String type, Integer length, String desc);
 	
 	public SqlField build() throws SqlBuildingException{

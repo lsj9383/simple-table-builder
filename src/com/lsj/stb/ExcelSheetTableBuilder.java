@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -34,7 +35,8 @@ public class ExcelSheetTableBuilder extends AbstractTableBuilder implements Tabl
 				for(int rownum=sheet.getFirstRowNum()+1; rownum<=sheet.getLastRowNum(); rownum++){
 					SqlFieldBuilder builder = fbfactory.getSqlFieldBuilder();
 					for(int cellnum=0; cellnum<sheet.getRow(rownum).getLastCellNum(); cellnum++){
-						loadSqlFieldBuilder(builder, columns.get(cellnum), sheet.getRow(rownum).getCell(cellnum).toString());
+						String content = getRowCellContent(sheet, rownum, cellnum);
+						loadSqlFieldBuilder(builder, columns.get(cellnum), content==null?"":content);
 					}
 					table.sqlFieldBuilders.add(builder);		//在table缓存每个字段的创建者, 目的是将builder在构建中可能会出的问题延迟到外面
 				}
@@ -42,7 +44,7 @@ public class ExcelSheetTableBuilder extends AbstractTableBuilder implements Tabl
 			}
 			workbook.close();
 			return sqlTables;
-		}catch(Exception e){throw new SqlBuilderException(e.getMessage());}
+		}catch(Exception e){e.printStackTrace();throw new SqlBuilderException(e.getMessage());}
 	}
 	
 	private void loadSqlFieldBuilder(SqlFieldBuilder builder, String colname, String content) throws SqlBuilderException{
@@ -67,6 +69,15 @@ public class ExcelSheetTableBuilder extends AbstractTableBuilder implements Tabl
 			columns.add(cell.toString());
 		}
 		return columns;
+	}
+	
+	private String getRowCellContent(XSSFSheet sheet, int row, int cell){
+		XSSFRow ro = sheet.getRow(row);
+		if(ro == null){return null;}
+		XSSFCell cel = ro.getCell(cell);
+		if(cel == null){return null;}
+		
+		return cel.toString();
 	}
 
 }

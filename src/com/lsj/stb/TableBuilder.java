@@ -9,6 +9,7 @@ import com.lsj.stb.exception.SqlBuildingException;
 
 public interface TableBuilder {
 	List<String> buildsqls(File file, Map<Integer, SqlBuildingException> mapExceptions) throws SqlBuilderException;
+	List<String> buildFormats(File file, Format format) throws SqlBuilderException, SqlBuildingException;
 	
 	enum SqlType{
 		SqlServer,

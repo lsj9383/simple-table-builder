@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lsj.stb.exception.SqlBuildingException;
+import com.lsj.stb.sql.field.SqlField;
 import com.lsj.stb.sql.field.SqlFieldBuilder;
-import com.lsj.stb.sql.field.SqlServerField;
 
 public class SqlTable {
 	public final String tableName;
-	public final List<SqlServerField> sqlFields = new ArrayList<>();
+	public final List<SqlField> sqlFields = new ArrayList<>();
 	public final List<SqlFieldBuilder> sqlFieldBuilders = new ArrayList<>();
 	
 	public SqlTable(String tableName){

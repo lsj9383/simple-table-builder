@@ -42,5 +42,21 @@ public abstract class AbstractTableBuilder extends AbstractStaticInformationTabl
 		return sqls;
 	}
 	
+	public List<String> buildFormats(File file, Format format) throws SqlBuilderException, SqlBuildingException{
+		if(!file.exists()){throw new SqlBuilderException("office file is not exist");}	//文件不存在
+		List<SqlTable> sqlTables = buildSql(file);
+		if(sqlTables == null){throw new SqlBuilderException("sqls is null");}	//sql建表语句为空
+		
+		List<String> formatOutputs = new ArrayList<String>();
+		for(SqlTable sqlTable : sqlTables){
+			StringBuilder sb = new StringBuilder();
+			for (int i=0; i<sqlTable.sqlFieldBuilders.size(); i++){
+				sb.append(format.output(i, sqlTable.sqlFieldBuilders.get(i)));
+			}
+			formatOutputs.add(sb.toString());
+		}
+		return formatOutputs;
+	}
+	
 	abstract List<SqlTable> buildSql(File file) throws SqlBuilderException;
 }
