@@ -8,8 +8,12 @@ import java.util.Map;
 import com.lsj.stb.exception.SqlBuilderException;
 import com.lsj.stb.exception.SqlBuildingException;
 import com.lsj.stb.sql.SqlTable;
+import com.lsj.stb.sql.factory.MySqlFieldBuilderFactory;
 import com.lsj.stb.sql.factory.SqlFieldBuilderFactory;
 import com.lsj.stb.sql.factory.SqlServerFieldBuilderFactory;
+import com.lsj.stb.sql.field.SqlFieldBuilder;
+import com.lsj.stb.structure.Line;
+import com.lsj.stb.structure.Table;
 
 public abstract class AbstractTableBuilder extends AbstractStaticInformationTableBuilder implements TableBuilder{
 
@@ -20,7 +24,7 @@ public abstract class AbstractTableBuilder extends AbstractStaticInformationTabl
 		this.sqlType = sqlType;
 		switch(sqlType){
 			case SqlServer: fbfactory = new SqlServerFieldBuilderFactory(); break;
-			case MySql: fbfactory = new SqlServerFieldBuilderFactory(); break;
+			case MySql: fbfactory = new MySqlFieldBuilderFactory(); break;
 			default : fbfactory = null; break;
 		}
 	}
@@ -28,8 +32,20 @@ public abstract class AbstractTableBuilder extends AbstractStaticInformationTabl
 	@Override
 	public List<String> buildsqls(File file,  Map<Integer, SqlBuildingException> exceptionMap) throws SqlBuilderException {
 		if(!file.exists()){throw new SqlBuilderException("office file is not exist");}	//文件不存在
-		List<SqlTable> sqlTables = buildSql(file);
-		if(sqlTables == null){throw new SqlBuilderException("sqls is null");}	//sql建表语句为空
+		List<Table> tables = loadTable(file);
+		List<SqlTable> sqlTables = new ArrayList<>();
+		for(Table table : tables){
+			SqlTable sqlTable = new SqlTable(table.getName());
+			for(Line line : table){
+				SqlFieldBuilder builder = fbfactory.getSqlFieldBuilder();
+				String[] keys = line.getKeys();
+				for(String key: keys){
+					loadSqlFieldBuilder(builder, key, line.get(key));	
+				}
+				sqlTable.sqlFieldBuilders.add(builder);
+			}
+			sqlTables.add(sqlTable);
+		}
 		
 		List<String> sqls = new ArrayList<>();
 		for(int index=0; index<sqlTables.size(); index++){
@@ -42,21 +58,19 @@ public abstract class AbstractTableBuilder extends AbstractStaticInformationTabl
 		return sqls;
 	}
 	
-	public List<String> buildFormats(File file, Format format) throws SqlBuilderException, SqlBuildingException{
-		if(!file.exists()){throw new SqlBuilderException("office file is not exist");}	//文件不存在
-		List<SqlTable> sqlTables = buildSql(file);
-		if(sqlTables == null){throw new SqlBuilderException("sqls is null");}	//sql建表语句为空
-		
-		List<String> formatOutputs = new ArrayList<String>();
-		for(SqlTable sqlTable : sqlTables){
-			StringBuilder sb = new StringBuilder();
-			for (int i=0; i<sqlTable.sqlFieldBuilders.size(); i++){
-				sb.append(format.output(i, sqlTable.sqlFieldBuilders.get(i)));
-			}
-			formatOutputs.add(sb.toString());
+	private void loadSqlFieldBuilder(SqlFieldBuilder builder, String colname, String content) throws SqlBuilderException{
+		String propertyName = col2pro.get(colname);
+		if(propertyName == null){
+			throw new SqlBuilderException("the column name <"+colname+"> cannot parse");
 		}
-		return formatOutputs;
+		
+		switch(propertyName){
+			case "chineseName": builder.setChineseName(content);break;
+			case "name": builder.setName(content);break;
+			case "type": builder.setType(content);break;
+			case "length": builder.setLength(content);break;
+			case "desc": builder.setDesc(content);break;
+			default:break;
+		}
 	}
-	
-	abstract List<SqlTable> buildSql(File file) throws SqlBuilderException;
 }
