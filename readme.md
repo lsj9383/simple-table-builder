@@ -12,7 +12,7 @@
 @Test
 public void test() throws Exception {
 	SqlTableBuilder stb = new ExcelSheetTableBuilder(SqlTableBuilder.SqlType.SqlServer);		//创建支持SqlServer建表的SqlTableBuilder
-	List<String> buildSqls = stb.buildsqls(new File("nb.xlsx"), new HashMap<>());				//获得对应excel中所有sheet的建表语句，hashMap用于记录错误
+	List<String> buildSqls = stb.buildsqls(new File("nb.xlsx"), new HashMap<>());			//获得对应excel中所有sheet的建表语句，hashMap用于记录错误
 	System.out.println(buildSqls.get(0));
 }
 ```
@@ -23,7 +23,7 @@ public void test() throws Exception {
 @Test
 public void test() throws Exception {
 	List<Table> tables = TableUtils.createTableByExcel(new File("nb.xlsx"));	//所有sheet转为Table
-	String out = tables.get(0).format(new FormatProcess(){						//每个Table都支持格式化
+	String out = tables.get(0).format(new FormatProcess(){			//每个Table都支持格式化
 		@Override
 		public String output(int index, Line line) {				//会按行顺序进入该方法，以格式化该行。最终的Table格式化就是所有行格式化结果的拼接
 			String origin = "%d, %s, %s\n";
@@ -62,7 +62,7 @@ public void test() throws ClassNotFoundException, SqlBuilderException {
 可以通过getLine可以获取一个Line：
 ```Java
 Line line = table.getLine(lineNumber);		//通过行号获取line，若没有该行号返回null。
-line.get(key);							//通过关键词获取对应的字符串,若没有该关键词返回null。该关键词强依赖table中的关键词。
+line.get(key);		//通过关键词获取对应的字符串,若没有该关键词返回null。该关键词强依赖table中的关键词。
 ```
 #### 迭代器
 迭代器仅仅实现了hasNext()和next()方法
