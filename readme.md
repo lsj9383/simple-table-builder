@@ -3,7 +3,7 @@
 * [SQL建表](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/CreatTableTest.java)
 * [Excel Sheet格式化输出](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/SheetFormatTest.java)
 * [Table使用](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/SimpleTest.java)
-* [前端语句生成](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/FrontGenerate.java)
+* [前端语句生成](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/FrontGenerateTest.java)
 ## 一.基本示例
 
 ### 1.建表语句生成
@@ -92,4 +92,18 @@ System.out.println(ou);
 ```
 
 ### 2.Table
-逻辑表，是该工具中的基本组件之一，其抽象是Table，现仅有SimpleTable作为其实现。表的逻辑组织是有多个关键词
+逻辑表，是该工具中的基本组件之一，其抽象是Table，现仅有SimpleTable作为其实现。表的逻辑组织是有多行并且有多个关键字，定位一个元素需要指定该元素所在的行和关键字。
+#### 创建Table
+在创建表的时候需要指定Table拥有的关键词，并且一旦创建Table后，其关键词就固定了，不能再修改。创建Table也可以给其指定名字，若没有指定将会以"no-name"字符串作为默认名字。
+```Java
+Table table1 = new SimpleTable(tableName, new String[]{key-1, key-2, ..., key-n});
+table1.addLine(new String[]{value-01, value-02, ..., value-0n});
+table1.addLine(new String[]{value-11, value-12, ..., value-1n});
+...
+table1.addLine(new String[]{value-m1, value-m2, ..., value-mn});
+```
+#### 从Excel加载Table
+由于Excel中有多个Sheet，因此从Excel中加载出来是多个Table。
+```Java
+List<Table> tables = TableUtils.createTableByExcel(new File("nb.xlsx"));
+```
