@@ -47,6 +47,14 @@ public class SimpleTable implements Table, Iterable<Line>{
 	}
 	
 	@Override
+	public Line getLine(int line) {
+		if(line >= lines.size()){
+			return null;
+		}
+		return lines.get(line);
+	}
+	
+	@Override
 	public void addLine(Map<String, String> line){
 		lines.add(new TableLine(line));
 	}
