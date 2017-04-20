@@ -40,7 +40,7 @@ public void test() throws Exception {
 逻辑行，这是该工具项目中最小的组件，也是Table组件的构成的基本元素(Table由多个Line组成)。Line的作用类似于Map，都是通过关键词获取数据，但是Line和Table是强关联的，只能获取Table中的Line，Line中的关键词就是Table中的关键词。<br>
 由于Line和Table相关联，因此这里简单介绍些Table，更细节的Table使用在后面将给出。Table是一个`行-关键字`组成的二维结构，这不同于`行-列`组成的二维结构，前者是通过行和关键字进行索引的，后者是通过行和列进行索引的。更进一步说关键字就是该二维结构的列。如果以面向对象打比方，Table就是一个Javabean的集合，下标等价于行，而Javabean的字段等价于关键字。<br>
 例如以下就是一个简单Table结构：
-![ https://github.com/lsj9383/simple-table-builder/blob/master/icon/simple-table-demo.png ](简单Table结构)
+![](https://github.com/lsj9383/simple-table-builder/blob/master/icon/simple-table-demo.png)
 现在来构建如上的Table:
 ```Java
 @Test
