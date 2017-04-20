@@ -103,7 +103,22 @@ table1.addLine(new String[]{value-11, value-12, ..., value-1n});
 table1.addLine(new String[]{value-m1, value-m2, ..., value-mn});
 ```
 #### 从Excel加载Table
-由于Excel中有多个Sheet，因此从Excel中加载出来是多个Table。
+由于Excel中有多个Sheet，因此从Excel中加载出来是多个Table。这里对Excel Sheet中的数据仅一个要求，即是二维表，其中第一行是关键字，后面就是每行的数据，例如：
+![](https://github.com/lsj9383/simple-table-builder/blob/master/icon/simple-table-demo.png)
 ```Java
 List<Table> tables = TableUtils.createTableByExcel(new File("nb.xlsx"));
 ```
+
+### 3.SqlTableBuilder
+这个组件用于从Excel Sheet中读取表描述然后生成建表的SQL语句。表描述的形式需要是一个二维表，并且这个二维表的关键字需要满足一些约束才能符合表描述而生成对应的SQL语句。下面是一个表描述的范例：<br>
+![](https://github.com/lsj9383/simple-table-builder/blob/master/icon/sqltable-demo.png)<br>
+用于进行表描述的Table必须要使用的关键词为：中文，英文，类型，长度，备注。而每个字段都用一行进行描述。关键词的顺序是没有关系的，关键词可以更多，但是其他的关键词不会在建表时反应出来，换句话说其他关键词不会影响建表。
+* 中文，可以为空，该项主要方便后期扩展，可以在仅知道中文的条件下，得到对应的英文字段名称，省去了字段逐个翻译的时间。
+* 英文，其实就是字段的名称。
+* 类型，字段的类型，会直接反应在建表语句上。
+* 长度，字段的长度。
+* 备注，可以为空，主要是用于描述该字段，常作为注释出现，也可以通过备注增加表约束。现在支持以下表约束
+	* 自增，通过在备注中使用"自增", "AUTO_INCREMENT"等关键词，可以让该字段具有自增的能力，会在建表语句中反映出。
+	* 主键约束，通过在备注中使用"主键", "PRIMARY KEY"等关键词，可以让该字段具备主键约束，会在建表语句中反应出来。
+	* 非空约束，通过在备注中使用"非空", "NOT NULL"等关键词，可以让字段具备非空约束，会在建表语句中反应出来。
+该结构的实现，是加载所有Sheet到Table中，在对每个Table进行逐行解析。
