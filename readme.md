@@ -1,5 +1,9 @@
 ﻿# Simple Table Builder
-这是一种利用office中的表描述进行建表的工具。
+这是一种利用office中的表描述进行建表的工具。附带了多种Demo以帮助用户更方便的使用：
+* [SQL建表](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/CreatTableTest.java)
+* [Excel Sheet格式化输出](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/SheetFormatTest.java)
+* [Table使用](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/SimpleTest.java)
+* [前端语句生成](https://github.com/lsj9383/simple-table-builder/blob/master/src/demo/FrontGenerate.java)
 ## 一.基本示例
 
 ### 1.建表语句生成
@@ -58,7 +62,7 @@ public void test() throws ClassNotFoundException, SqlBuilderException {
 可以通过getLine可以获取一个Line：
 ```Java
 Line line = table.getLine(lineNumber);		//通过行号获取line，若没有该行号返回null。
-line.get(key);								//通过关键词获取对应的字符串,若没有该关键词返回null。该关键词强依赖table中的关键词。
+line.get(key);							//通过关键词获取对应的字符串,若没有该关键词返回null。该关键词强依赖table中的关键词。
 ```
 #### 迭代器
 迭代器仅仅实现了hasNext()和next()方法
