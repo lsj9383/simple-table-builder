@@ -9,7 +9,7 @@ import com.lsj.stb.exception.SqlBuilderException;
 import com.lsj.stb.structure.Table;
 import com.lsj.stb.structure.TableUtils;
 
-public class ExcelSheetTableBuilder extends AbstractTableBuilder implements TableBuilder{
+public class ExcelSheetTableBuilder extends AbstractTableBuilder implements SqlTableBuilder{
 
 	public ExcelSheetTableBuilder(SqlType sqlType) throws ClassNotFoundException {
 		super(sqlType);

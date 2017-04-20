@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lsj.stb.ExcelSheetTableBuilder;
-import com.lsj.stb.TableBuilder;
+import com.lsj.stb.SqlTableBuilder;
 import com.lsj.stb.exception.SqlBuilderException;
 import com.lsj.stb.exception.SqlBuildingException;
 import com.lsj.stb.sql.SqlUtils;
@@ -18,7 +18,7 @@ import com.lsj.stb.structure.TableUtils;
 public class Main {
 	
 	static void test1() throws ClassNotFoundException, SqlBuilderException{
-		TableBuilder tb = new ExcelSheetTableBuilder(TableBuilder.SqlType.SqlServer);
+		SqlTableBuilder tb = new ExcelSheetTableBuilder(SqlTableBuilder.SqlType.SqlServer);
 		Map<Integer, SqlBuildingException> map = new HashMap<>();
 		List<String> buildSqls = tb.buildsqls(new File("C:/Users/lu/Desktop/Temporary/nb.xlsx"), map);
 		for(String sql : buildSqls){

@@ -9,7 +9,7 @@ import java.util.Map;
  * @author think
  *
  */
-public abstract class AbstractStaticInformationTableBuilder implements TableBuilder{
+public abstract class AbstractStaticInformationTableBuilder implements SqlTableBuilder{
 	/**
 	 * col2pro用于将office中的列名和SqlField中的属性名进行对应，这样可以不用强行规定office中的列名顺序，并且支持更多的列名选择。
 	 */

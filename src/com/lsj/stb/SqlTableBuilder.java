@@ -7,7 +7,7 @@ import java.util.Map;
 import com.lsj.stb.exception.SqlBuilderException;
 import com.lsj.stb.exception.SqlBuildingException;
 
-public interface TableBuilder {
+public interface SqlTableBuilder {
 	List<String> buildsqls(File file, Map<Integer, SqlBuildingException> mapExceptions) throws SqlBuilderException;
 	enum SqlType{
 		SqlServer,

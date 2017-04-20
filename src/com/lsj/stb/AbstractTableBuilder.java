@@ -15,7 +15,7 @@ import com.lsj.stb.sql.field.SqlFieldBuilder;
 import com.lsj.stb.structure.Line;
 import com.lsj.stb.structure.Table;
 
-public abstract class AbstractTableBuilder extends AbstractStaticInformationTableBuilder implements TableBuilder{
+public abstract class AbstractTableBuilder extends AbstractStaticInformationTableBuilder implements SqlTableBuilder{
 
 	protected final SqlType sqlType;
 	protected SqlFieldBuilderFactory fbfactory;
