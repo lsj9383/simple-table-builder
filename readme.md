@@ -103,7 +103,7 @@ table1.addLine(new String[]{value-11, value-12, ..., value-1n});
 table1.addLine(new String[]{value-m1, value-m2, ..., value-mn});
 ```
 #### 从Excel加载Table
-由于Excel中有多个Sheet，因此从Excel中加载出来是多个Table。这里对Excel Sheet中的数据仅一个要求，即是二维表，其中第一行是关键字，后面就是每行的数据，例如：
+由于Excel中有多个Sheet，因此从Excel中加载出来是多个Table。这里对Excel Sheet中的数据仅一个要求，即是二维表，其中第一行是关键字，后面就是每行的数据，例如：<br>
 ![](https://github.com/lsj9383/simple-table-builder/blob/master/icon/simple-table-demo.png)
 ```Java
 List<Table> tables = TableUtils.createTableByExcel(new File("nb.xlsx"));
