@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lsj.stb.ExcelSheetTableBuilder;
 import com.lsj.stb.TableBuilder;
@@ -15,8 +14,7 @@ import com.lsj.stb.structure.FormatProcess;
 import com.lsj.stb.structure.Line;
 import com.lsj.stb.structure.SimpleTable;
 import com.lsj.stb.structure.Table;
-import com.lsj.stb.structure.AbstractTable;
-
+import com.lsj.stb.structure.TableUtils;
 public class Main {
 	
 	static void test1() throws ClassNotFoundException, SqlBuilderException{
@@ -30,7 +28,7 @@ public class Main {
 	}
 	
 	static void test2(){
-		AbstractTable table = new SimpleTable(new String[]{"name", "sex", "age"});
+		Table table = new SimpleTable(new String[]{"name", "sex", "age"});
 		table.addLine(new String[]{"lsj", "boy", "24"});
 		table.addLine(new String[]{"hjs", "girl", "18"});
 		String ou = table.format(new FormatProcess() {
@@ -43,9 +41,8 @@ public class Main {
 		System.out.println(ou);
 	}
 	
-	static void test3() throws ClassNotFoundException, SqlBuilderException{
-		TableBuilder tb = new ExcelSheetTableBuilder(TableBuilder.SqlType.SqlServer);
-		List<Table> tables = tb.loadTable(new File("C:/Users/lu/Desktop/Temporary/nb.xlsx"));
+	static void test3() throws Exception{
+		List<Table> tables = TableUtils.createTableByExcel(new File("C:/Users/lu/Desktop/Temporary/nb.xlsx"));
 		for(Table table : tables){
 			String out = table.format(new FormatProcess(){
 				@Override

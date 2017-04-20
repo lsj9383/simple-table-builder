@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/poi-scratchpad-3.14-20160307.jar"/>
 	<classpathentry kind="lib" path="lib/curvesapi-1.03.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

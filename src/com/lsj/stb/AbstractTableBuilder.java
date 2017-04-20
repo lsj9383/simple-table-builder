@@ -73,4 +73,6 @@ public abstract class AbstractTableBuilder extends AbstractStaticInformationTabl
 			default:break;
 		}
 	}
+	
+	abstract public List<Table> loadTable(File file) throws SqlBuilderException;
 }
